@@ -58,10 +58,9 @@ sess.run(init)
 
 for i in range(1000):
     batch_xs, batch_ys = mnist.train.next_batch(100)
-    #print (batch_xs)
     sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys})
     if i % 50 == 0:
         print(compute_accuracy(
             mnist.test.images, mnist.test.labels))
 
-#print(batch_ys)
+print(batch_xs[0],batch_ys[0])

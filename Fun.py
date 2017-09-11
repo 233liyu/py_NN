@@ -15,13 +15,20 @@ subtrainLabel = pd.read_csv('11/subtrainLabels.csv')
 subtrainfeature = pd.read_csv("11/imgfeature.csv")
 subtrain = pd.merge(subtrainLabel,subtrainfeature,on='Id')
 labels = subtrain.Class
+
 subtrain.drop(["Class","Id"], axis=1, inplace=True)
 subtrain = subtrain.as_matrix()
-X_train, X_test, y_train, y_test = train_test_split(subtrain,labels,test_size=0.4)
-
+#X_train, X_test, y_train, y_test = train_test_split(subtrain,labels,test_size=0.4)
+X_train=subtrain[0:540]
+y_train=labels[0:540]
+X_test=subtrain[0:360]
+y_test=labels[0:360]
 #y_train1=tf.zeros([540,9],tf.int32)
 #print X_train
 #y1=y_train.as_matrix()
+#print y_test
+X_train=X_train.__div__(255.0)
+X_test=X_test.__div__(255.0)
 
 y_train=tpyeexchange.changetpye1(y_train)
 y_test=tpyeexchange.changetpye2(y_test)
@@ -54,11 +61,11 @@ print X_train.shape
 
 # Random seed.
 rseed = 42
-batch_size = 540
+batch_size = 60
 lr = 1e-1
-num_epochs = 55
-num_hiddens = 500
-num_train, num_feats = X_train.shape
+num_epochs = 40
+num_hiddens = 1500
+num_train , num_feats = X_train.shape
 num_test = X_test.shape[0]
 num_classes = 9
 

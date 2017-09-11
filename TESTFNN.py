@@ -13,13 +13,17 @@ from sklearn.model_selection import train_test_split
 
 subtrainLabel = pd.read_csv('11/subtrainLabels.csv')
 subtrainfeature = pd.read_csv("11/imgfeature.csv")
-subtrain = pd.merge(subtrainLabel,subtrainfeature,on='Id')
+subtrain = pd.merge(subtrainLabel, subtrainfeature, on='Id')
 labels = subtrain.Class
-subtrain.drop(["Class","Id"], axis=1, inplace=True)
+subtrain.drop(["Class", "Id"], axis=1, inplace=True)
 subtrain = subtrain.as_matrix()
-X_train, X_test, y_train, y_test = train_test_split(subtrain,labels,test_size=0.4)
+X_train, X_test, y_train, y_test = train_test_split(subtrain, labels, test_size=0.4)
+X_train=X_train.__div__(255.0)
+X_test=X_test.__div__(255.0)
 y_train=tpyeexchange.changetpye1(y_train)
 y_test=tpyeexchange.changetpye2(y_test)
+print X_train
+print y_train
 
 def add_layer(inputs, in_size, out_size, activation_function=None,):
     # add one more layer and return the output of this layer

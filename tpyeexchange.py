@@ -15,7 +15,7 @@ def changetpye1(y_train):
     return yy
 
 def changetpye2(y_train):
-    y_train.sort_index()
+    #y_train.sort_index()
     yy = np.zeros((360, 9))
     y2 = np.array(y_train)
     y3 = y2.reshape(360, 1)
