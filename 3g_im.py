@@ -1,3 +1,5 @@
+
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import numpy as np
@@ -11,13 +13,16 @@ from sklearn.model_selection import train_test_split
 # Using Tensorflow's default tools to fetch data, this is the same as what we did in the first homework assignment.
 #mnist = input_data.read_data_sets('./mnist', one_hot=True)
 
-subtrainLabel = pd.read_csv('11/subtrainLabels.csv')
-subtrainfeature = pd.read_csv("11/imgfeature.csv")
-subtrain = pd.merge(subtrainLabel,subtrainfeature,on='Id')
-labels = subtrain.Class
 
+subtrainLabel = pd.read_csv('subtrainLabels.csv')
+subtrainfeature1 = pd.read_csv("3gramfeature.csv")
+subtrainfeature2 = pd.read_csv("imgfeature.csv")
+subtrain = pd.merge(subtrainfeature1,subtrainfeature2,on='Id')
+subtrain = pd.merge(subtrain,subtrainLabel,on='Id')
+labels = subtrain.Class
 subtrain.drop(["Class","Id"], axis=1, inplace=True)
 subtrain = subtrain.as_matrix()
+
 X_train, X_test, y_train, y_test = train_test_split(subtrain,labels,test_size=0.4)
 #X_train=subtrain[0:540]
 #y_train=labels[0:540]
@@ -63,8 +68,8 @@ print X_train.shape
 rseed = 42
 batch_size = 60
 lr = 1e-1
-num_epochs = 40
-num_hiddens = 500
+num_epochs = 200
+num_hiddens = 5000
 num_train , num_feats = X_train.shape
 num_test = X_test.shape[0]
 num_classes = 9

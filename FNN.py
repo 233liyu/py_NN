@@ -12,31 +12,30 @@ import Change
 # mnist = input_data.read_data_sets('./mnist', one_hot=True)
 
 subtrainLabel = pd.read_csv('subtrainLabels.csv')
-subtrainfeature = pd.read_csv("imgfeature.csv")
+subtrainfeature = pd.read_csv("3gramfeature.csv")
 subtrain = pd.merge(subtrainLabel, subtrainfeature, on='Id')
 labels = subtrain.Class
 
 
 subtrain.drop(["Class", "Id"], axis=1, inplace=True)
 subtrain = subtrain.as_matrix()
-X_train, X_test, y_train, y_test = train_test_split(subtrain, labels, test_size=0.01, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(subtrain, labels, test_size=0.4,random_state=42)
 
 
 X_train=np.array(X_train,dtype=np.float)
 X_train =X_train.__div__(255.0)
 X_test=X_test.__div__(255.0)
-print X_train
-print X_test
+
 
 y_train = Change.changetpye3(y_train)
 y_test = Change.changetpye3(y_test)
 
-# Random seed.
+# Random seed.,
 rseed = 42
-batch_size = 60
+batch_size = 30
 lr = 1e-1
-num_epochs = 20
-num_hiddens = 500
+num_epochs = 100
+num_hiddens = 1500
 num_train, num_feats = X_train.shape
 num_test = X_test.shape[0]
 num_classes = 10
@@ -75,7 +74,7 @@ optimizer = tf.train.GradientDescentOptimizer(lr).minimize(loss)
 # Start training!
 num_batches = num_train / batch_size
 losses = []
-train_accs, valid_accs = [], []
+train_accs, valid_accs = [], [],
 time_start = time.time()
 with tf.Session() as sess:
     # Before evaluating the graph, we should initialize all the variables.
