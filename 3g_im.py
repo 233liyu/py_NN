@@ -8,6 +8,7 @@ import time
 import matplotlib.pyplot as plt
 import pandas as pd
 import tpyeexchange
+import Change
 #from sklearn import cross_validation
 from sklearn.model_selection import train_test_split
 # Using Tensorflow's default tools to fetch data, this is the same as what we did in the first homework assignment.
@@ -34,9 +35,11 @@ X_train, X_test, y_train, y_test = train_test_split(subtrain,labels,test_size=0.
 #print y_test
 X_train=X_train.__div__(255.0)
 X_test=X_test.__div__(255.0)
-
+'''
 y_train=tpyeexchange.changetpye1(y_train)
-y_test=tpyeexchange.changetpye2(y_test)
+y_test=tpyeexchange.changetpye2(y_test)'''
+y_train=Change.changetpye3(y_train)
+y_test=Change.changetpye3(y_test)
 #print yy
 #y_train.tolist()
 #list(y_train)
@@ -72,7 +75,7 @@ num_epochs = 200
 num_hiddens = 5000
 num_train , num_feats = X_train.shape
 num_test = X_test.shape[0]
-num_classes = 9
+num_classes = 10
 
 # Placeholders that should be filled with training pairs (x, y). Use None to unspecify the first dimension
 # for flexibility.
